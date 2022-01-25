@@ -84,22 +84,6 @@ public class ChooseRentController{
 
         }
 
-        @FXML
-        void OpenPC() {
-
-        }
-
-        @FXML
-        void OpenKeyboard() {
-
-        }
-
-        @FXML
-        void OpenMouse() {
-
-        }
-
-
 }
 
 

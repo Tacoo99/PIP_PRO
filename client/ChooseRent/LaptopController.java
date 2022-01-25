@@ -1,5 +1,6 @@
 package client.ChooseRent;
 
+import client.ConfirmOrder.ConfirmOrderController;
 import client.MainPage.MainPageController;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValue;
@@ -26,7 +27,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
-public class LaptopController implements Initializable{
+public class LaptopController implements Initializable {
 
     @FXML
     private Button BackMenu;
@@ -40,7 +41,7 @@ public class LaptopController implements Initializable{
 
     String errorStyle = "-fx-border-color: RED; -fx-border-width: 2; -fx-border-radius: 5;";
     String successStyle = "-fx-border-color: #A9A9A9; -fx-border-width: 2; -fx-border-radius: 5;";
-    String ChosenLaptop;
+    String SN;
 
     @FXML
     private ComboBox<String> cpuCombo;
@@ -52,10 +53,10 @@ public class LaptopController implements Initializable{
     private ComboBox<String> gpuCombo;
 
     @FXML
-    private ComboBox<String>ramCombo;
+    private ComboBox<String> ramCombo;
 
     @FXML
-    private ComboBox<String>ekranCombo;
+    private ComboBox<String> ekranCombo;
 
     @FXML
     private Label loggedUser;
@@ -65,10 +66,10 @@ public class LaptopController implements Initializable{
 
     @FXML
     private Button confirm;
-
     String CurrUSer;
+    String producent,model,cpu,gpu,ram,dysk,ekran;
 
-    public void setUser(String login){
+    public void setUser(String login) {
         this.CurrUSer = login;
         loggedUser.setText(CurrUSer);
 
@@ -82,12 +83,12 @@ public class LaptopController implements Initializable{
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
 
-            producentCombo.getItems().addAll("Asus", "Lenovo", "Acer", "Samsung");
-            cpuCombo.getItems().addAll("i5", "i7", "i3", "Ryzen", "Xeon");
-            gpuCombo.getItems().addAll("Nvidia", "Radeon", "Intel");
-            ramCombo.getItems().addAll("DDR3", "DDR3L", "DDR4");
-            diskCombo.getItems().addAll("SSD", "SSHD", "HDD");
-            ekranCombo.getItems().addAll("LED", "LCD", "IPS");
+        producentCombo.getItems().addAll("Asus", "Lenovo", "Acer", "Samsung");
+        cpuCombo.getItems().addAll("i5", "i7", "i3", "Ryzen", "Xeon");
+        gpuCombo.getItems().addAll("Nvidia", "Radeon", "Intel");
+        ramCombo.getItems().addAll("DDR3", "DDR3L", "DDR4");
+        diskCombo.getItems().addAll("SSD", "SSHD", "HDD");
+        ekranCombo.getItems().addAll("LED", "LCD", "IPS");
 
     }
 
@@ -199,12 +200,12 @@ public class LaptopController implements Initializable{
             } catch (SQLException e) {
                 e.printStackTrace();
             }
-
         }
+
     }
 
     @FXML
-    void getAll(){
+    void getAll() {
 
         tblData.getItems().clear();
         data = FXCollections.observableArrayList();
@@ -214,15 +215,15 @@ public class LaptopController implements Initializable{
 
         String SQL = "SELECT Producent, Model, CPU, GPU, RAM, Dysk, Ekran, SN FROM stock WHERE Typ = ?";
 
-        try{
+        try {
 
-        preparedStatement = con.prepareStatement(SQL);
-        preparedStatement.setString(1, "Laptop" );
-        ResultSet rs = preparedStatement.executeQuery();
+            preparedStatement = con.prepareStatement(SQL);
+            preparedStatement.setString(1, "Laptop");
+            ResultSet rs = preparedStatement.executeQuery();
 
-            for(int i=0 ; i<rs.getMetaData().getColumnCount(); i++){
+            for (int i = 0; i < rs.getMetaData().getColumnCount(); i++) {
                 final int j = i;
-                TableColumn col = new TableColumn(rs.getMetaData().getColumnName(i+1));
+                TableColumn col = new TableColumn(rs.getMetaData().getColumnName(i + 1));
 
                 col.setCellValueFactory((Callback<TableColumn.CellDataFeatures<ObservableList, String>, ObservableValue<String>>)
                         param -> new SimpleStringProperty(param.getValue().get(j).toString()));
@@ -248,10 +249,10 @@ public class LaptopController implements Initializable{
 
     }
 
-        @FXML
+    @FXML
     void CategoryBack(MouseEvent event) {
 
-        try{
+        try {
 
             Node node = (Node) event.getSource();
             Stage stageAccount = (Stage) node.getScene().getWindow();
@@ -270,7 +271,6 @@ public class LaptopController implements Initializable{
             stage.show();
 
 
-
         } catch (IOException ex) {
             System.err.println(ex.getMessage());
         }
@@ -281,9 +281,9 @@ public class LaptopController implements Initializable{
     @FXML
     void onBackButton() {
 
-        try{
+        try {
 
-            Stage stageOld = (Stage) BackMenu.getScene().getWindow();
+            Stage stageOld = (Stage) confirm.getScene().getWindow();
             stageOld.close();
 
             FXMLLoader loader = new FXMLLoader(getClass().getResource("../MainPage/MainPage.fxml"));
@@ -299,19 +299,74 @@ public class LaptopController implements Initializable{
             stage.show();
 
 
-
         } catch (IOException ex) {
             System.err.println(ex.getMessage());
         }
     }
 
     @FXML
-    void confirmRent(){
+    void confirmRent() {
+
         ObservableList test = tblData.getSelectionModel().getSelectedItem();
 
-        ChosenLaptop = (String) test.get(7);
+        SN = (String) test.get(7);
 
-        System.out.println("Wybrano laptopa o SN: " + test.get(7) );
+        System.out.println("Wybrano laptopa o SN: " + SN);
+
+        String SQL2 = "SELECT Producent, Model, CPU, GPU, RAM, Dysk, Ekran FROM stock WHERE SN = ?";
+
+        try {
+            preparedStatement = con.prepareStatement(SQL2);
+            preparedStatement.setString(1, SN);
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            while(resultSet.next()) {
+
+                producent = resultSet.getString("Producent");
+                model = resultSet.getString("Model");
+                cpu = resultSet.getString("CPU");
+                gpu = resultSet.getString("GPU");
+                ram = resultSet.getString("RAM");
+                dysk = resultSet.getString("Dysk");
+                ekran = resultSet.getString("Ekran");
+
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        try {
+
+            Stage stageOld = (Stage) confirm.getScene().getWindow();
+            stageOld.close();
+
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("../ConfirmOrder/ConfirmOrder.fxml"));
+            Parent root = loader.load();
+
+            ConfirmOrderController scene2Controller = loader.getController();
+            scene2Controller.setSN(SN);
+            scene2Controller.setUsername(CurrUSer);
+            scene2Controller.setProducent(producent);
+            scene2Controller.setModel(model);
+            scene2Controller.setCPU(cpu);
+            scene2Controller.setGPU(gpu);
+            scene2Controller.setRAM(ram);
+            scene2Controller.setDysk(dysk);
+            scene2Controller.setEkran(ekran);
+
+
+
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            stage.getIcons().add(new Image("/images/icons8_file_settings_128px.png"));
+            stage.setTitle("Panel klienta - potwierdź zakup");
+            stage.show();
+
+
+        } catch(IOException ex){
+            System.err.println(ex.getMessage());
+        }
     }
 
 }
