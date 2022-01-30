@@ -44,13 +44,29 @@ public class AddDeviceController implements Initializable {
     private TableView<ObservableList> tblData;
 
     @FXML
-    private TextField txtProducent;
+    private TextField txtCPU;
+
+    @FXML
+    private TextField txtDysk;
+
+    @FXML
+    private TextField txtEkran;
+
+    @FXML
+    private TextField txtGPU;
 
     @FXML
     private TextField txtModel;
 
     @FXML
+    private TextField txtProducent;
+
+    @FXML
+    private TextField txtRAM;
+
+    @FXML
     private TextField txtSN;
+
 
     @FXML
     private ComboBox<String> txtTyp;
@@ -125,8 +141,10 @@ public class AddDeviceController implements Initializable {
     private void HandleEvents() {
 
 
-        //Nie sprawdzam czy txtID jest puste ponieważ magazyn ma funkcję autoinkrementacji
-        if (txtId.getText().isEmpty() || txtSN.getText().isEmpty() || txtModel.getText().isEmpty() || txtProducent.getText().isEmpty() || txtTyp.getValue() == null)
+
+        if ( txtId.getText().isEmpty() || txtSN.getText().isEmpty() || txtModel.getText().isEmpty() || txtProducent.getText().isEmpty() || txtTyp.getValue() == null
+        || txtCPU.getText().isEmpty() || txtGPU.getText().isEmpty() || txtRAM.getText().isEmpty() || txtDysk.getText().isEmpty() || txtEkran.getText().isEmpty() )
+
         {
 
             lblStatus.setTextFill(Color.TOMATO);
@@ -144,7 +162,7 @@ public class AddDeviceController implements Initializable {
     }
 
     private void clearFields() {
-        for (TextField textField : Arrays.asList(txtId, txtSN, txtModel, txtProducent)) {
+        for (TextField textField : Arrays.asList( txtId, txtSN, txtModel, txtProducent, txtCPU, txtGPU, txtEkran, txtRAM, txtDysk )) {
             textField.clear();
         }
         txtTyp.setSelectionModel(null);
@@ -159,21 +177,32 @@ public class AddDeviceController implements Initializable {
             obj.producent = txtProducent.getText();
             obj.model = txtModel.getText();
             obj.typ = txtTyp.getValue();
-            obj.isAvialable = true;
+            obj.cpu = txtCPU.getText();
+            obj.gpu = txtGPU.getText();
+            obj.ram = txtRAM.getText();
+            obj.dysk = txtDysk.getText();
+            obj.ekran = txtEkran.getText();
+            obj.dostepny = "1";
 
         try {
-            String st = "INSERT INTO stock ( ID, SN, Producent, Model, Typ, Dostepny) VALUES (?,?,?,?,?,?)";
+            String st = "INSERT INTO stock ( ID, SN, Producent, Model, Typ, CPU, GPU, RAM, Dysk, Ekran, Dostepny) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
             preparedStatement = con.prepareStatement(st);
             preparedStatement.setString(1, obj.id);
             preparedStatement.setString(2, obj.sn);
             preparedStatement.setString(3, obj.producent);
             preparedStatement.setString(4, obj.model);
             preparedStatement.setString(5, obj.typ);
-            preparedStatement.setBoolean(6,obj.isAvialable);
+            preparedStatement.setString(6, obj.cpu);
+            preparedStatement.setString(7, obj.gpu);
+            preparedStatement.setString(8, obj.ram);
+            preparedStatement.setString(9, obj.dysk);
+            preparedStatement.setString(10, obj.ekran);
+            preparedStatement.setString(11,obj.dostepny);
 
             preparedStatement.executeUpdate();
             lblStatus.setTextFill(Color.GREEN);
             lblStatus.setText("Dodano pomyślnie");
+
 
             fetRowList();
             clearFields();

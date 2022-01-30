@@ -7,19 +7,19 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-import org.w3c.dom.Text;
-import org.w3c.dom.ls.LSOutput;
+import utils.ConnectionUtil;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -27,8 +27,18 @@ import java.util.ResourceBundle;
 
 public class ConfirmOrderController implements Initializable{
 
+    Connection con;
+    PreparedStatement preparedStatement;
+    ResultSet resultSet;
+
+    public ConfirmOrderController() {
+        con = ConnectionUtil.conDB();
+    }
+
     @FXML
     private Label loggedUser;
+    @FXML
+    private Label errorLbl;
     @FXML
     private TextField txtCPU;
     @FXML
@@ -192,52 +202,114 @@ public class ConfirmOrderController implements Initializable{
         }
     }
 
+    private void setLblError(){
+        errorLbl.setTextFill(Color.TOMATO);
+        errorLbl.setText("Uzupełnij wszystkie pola!");
+    }
+
+    private void setlblSuccess(){
+        errorLbl.setTextFill(Color.GREEN);
+        errorLbl.setText("Wszystko jest w porządku :)!");
+    }
+
     @FXML
     private void confirmOrder(){
 
+        boolean status = false;
+
         if( txtImie.getText().isEmpty() ){
             txtImie.setStyle(errorStyle);
+            setLblError();
+            status = false;
         }
         else{
             txtImie.setStyle(successStyle);
+            setlblSuccess();
+            status = true;
         }
 
         if( txtNazwisko.getText().isEmpty() ){
             txtNazwisko.setStyle(errorStyle);
+            setLblError();
+            status = false;
         }
         else{
             txtNazwisko.setStyle(successStyle);
+            setlblSuccess();
+            status = true;
         }
 
         if( txtMiasto.getText().isEmpty() ){
             txtMiasto.setStyle(errorStyle);
+            setLblError();
+            status = false;
         }
         else{
             txtMiasto.setStyle(successStyle);
+            setlblSuccess();
+            status = true;
         }
 
-        if( txtDataDo.getValue() != null){
+        if( txtDataDo.getValue() == null){
             txtDataDo.setStyle(errorStyle);
+            setLblError();
+            status = false;
         }
         else{
             txtDataDo.setStyle(successStyle);
+            setlblSuccess();
+            status = true;
         }
 
         if( txtUlica.getText().isEmpty() ){
             txtUlica.setStyle(errorStyle);
+            setLblError();
+            status = false;
         }
         else{
             txtUlica.setStyle(successStyle);
+            setlblSuccess();
+            status = true;
         }
 
         if( txtKod.getText().isEmpty() ){
             txtKod.setStyle(errorStyle);
+            setLblError();
+            status = false;
         }
         else{
             txtKod.setStyle(successStyle);
+            setlblSuccess();
+            status = true;
         }
+
+        if(status){
+
+            System.out.println("Ustawiam wartość 'dostepny' tego sprzętu na 0");
+
+            String SQL = "UPDATE stock set Dostepny = 0 WHERE SN = ?";
+
+            try {
+                preparedStatement = con.prepareStatement(SQL);
+                preparedStatement.setString(1, SN);
+                preparedStatement.executeUpdate();
+
+        } catch (SQLException e) {
+                e.printStackTrace();
+            }
+
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Potwierdzenie zamówienia");
+            alert.setHeaderText(null);
+            alert.setContentText("Zamówienie zostało złożone, damy Ci znać jak tylko potwierdzimy twój zakup");
+
+            alert.showAndWait();
+
+        }
+
 
     }
 
 
 }
+

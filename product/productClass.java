@@ -7,7 +7,12 @@ public class productClass {
     public  String producent;
     public String model;
     public  String typ;
-    public boolean isAvialable;
+    public String cpu;
+    public String gpu;
+    public String ram;
+    public String dysk;
+    public String ekran;
+    public String dostepny;
 
 
 

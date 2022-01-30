@@ -104,7 +104,6 @@ public class LoginController implements Initializable, Serializable {
                     stage.close();
 
                     Scene scene = new Scene(FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/admin/home/Home_Admin.fxml"))));
-                    stage.initStyle(StageStyle.UNDECORATED);
                     stage.getIcons().add(new Image("/images/icons8_file_settings_128px.png"));
                     stage.setTitle("SKL - strona główna");
                     stage.setScene(scene);

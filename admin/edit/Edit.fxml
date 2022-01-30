@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="dostepnoscTxt" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseDragged="#dragged" onMousePressed="#pressed" prefHeight="579.0" prefWidth="771.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="admin.edit.EditController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseDragged="#dragged" onMousePressed="#pressed" prefHeight="579.0" prefWidth="771.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="admin.edit.EditController">
    <children>
       <Pane prefHeight="579.0" prefWidth="240.0" style="-fx-background-color: #0C60FF;">
          <children>
@@ -40,19 +40,19 @@
          </children>
       </Pane>
       <TextField fx:id="idTxt" layoutX="322.0" layoutY="227.0" prefHeight="25.0" prefWidth="51.0" />
-      <TextField fx:id="modelTxt" layoutX="347.0" layoutY="290.0" prefHeight="25.0" prefWidth="105.0" />
-      <TextField fx:id="producentTxt" layoutX="587.0" layoutY="227.0" prefHeight="25.0" prefWidth="94.0" />
-      <TextField fx:id="typTxt" layoutX="480.0" layoutY="290.0" prefHeight="25.0" prefWidth="113.0" />
+      <TextField fx:id="modelTxt" layoutX="613.0" layoutY="227.0" prefHeight="25.0" prefWidth="105.0" />
+      <TextField fx:id="producentTxt" layoutX="500.0" layoutY="227.0" prefHeight="25.0" prefWidth="94.0" />
+      <TextField fx:id="typTxt" layoutX="342.0" layoutY="295.0" prefHeight="25.0" prefWidth="113.0" />
       <Label alignment="CENTER" layoutX="317.0" layoutY="133.0" prefHeight="23.0" prefWidth="330.0" text="Wprowadź niezbędne zmiany i wciśnij &quot;Zapisz&quot;">
          <font>
             <Font name="Segoe UI" size="14.0" />
          </font>
       </Label>
       <Label layoutX="341.0" layoutY="192.0" text="ID" />
-      <Label layoutX="443.0" layoutY="192.0" text="Numer seryjny" />
-      <Label layoutX="607.0" layoutY="192.0" text="Producent" />
-      <Label layoutX="389.0" layoutY="261.0" text="Model" />
-      <Button layoutX="454.0" layoutY="354.0" mnemonicParsing="false" onAction="#saveChanges" stylesheets="@../style/style.css" text="Zapisz" />
+      <Label layoutX="398.0" layoutY="192.0" text="Numer seryjny" />
+      <Label layoutX="520.0" layoutY="192.0" text="Producent" />
+      <Label layoutX="648.0" layoutY="192.0" text="Model" />
+      <Button layoutX="474.0" layoutY="440.0" mnemonicParsing="false" onAction="#saveChanges" stylesheets="@../style/style.css" text="Zapisz" />
       <Label fx:id="lbl_close" layoutX="731.0" layoutY="26.0" onMouseClicked="#handleExitAction" prefHeight="23.0" prefWidth="9.0" stylesheets="@../style/style.css" text="X" textFill="#5383ff">
          <font>
             <Font name="Segoe UI Bold" size="18.0" />
@@ -68,9 +68,19 @@
             <Label fx:id="lbl_status" layoutX="14.0" layoutY="24.0" prefHeight="17.0" prefWidth="281.0" text="Status" />
          </children>
       </Pane>
-      <TextField fx:id="snTxt" layoutX="434.0" layoutY="227.0" prefHeight="25.0" prefWidth="94.0" />
-      <Label layoutX="527.0" layoutY="261.0" text="Typ" />
-      <TextField fx:id="dostTxt" layoutX="634.0" layoutY="290.0" prefHeight="25.0" prefWidth="63.0" />
-      <Label layoutX="640.0" layoutY="261.0" text="Dostepny" />
+      <TextField fx:id="snTxt" layoutX="389.0" layoutY="227.0" prefHeight="25.0" prefWidth="94.0" />
+      <Label layoutX="389.0" layoutY="266.0" text="Typ" />
+      <TextField fx:id="dostTxt" layoutX="310.0" layoutY="354.0" prefHeight="25.0" prefWidth="63.0" />
+      <Label layoutX="316.0" layoutY="325.0" text="Dostepny" />
+      <TextField fx:id="gpuTxt" layoutX="602.0" layoutY="293.0" prefHeight="25.0" prefWidth="63.0" />
+      <TextField fx:id="cpuTxt" layoutX="489.0" layoutY="293.0" prefHeight="25.0" prefWidth="63.0" />
+      <Label layoutX="513.0" layoutY="261.0" text="CPU" />
+      <Label layoutX="622.0" layoutY="261.0" text="GPU" />
+      <TextField fx:id="dyskTxt" layoutX="500.0" layoutY="352.0" prefHeight="25.0" prefWidth="105.0" />
+      <TextField fx:id="ramTxt" layoutX="390.0" layoutY="352.0" prefHeight="25.0" prefWidth="94.0" />
+      <Label layoutX="420.0" layoutY="330.0" text="RAM" />
+      <Label layoutX="535.0" layoutY="330.0" text="Dysk" />
+      <TextField fx:id="ekranTxt" layoutX="622.0" layoutY="352.0" prefHeight="25.0" prefWidth="105.0" />
+      <Label layoutX="657.0" layoutY="330.0" text="Ekran" />
    </children>
 </AnchorPane>

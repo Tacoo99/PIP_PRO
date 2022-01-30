@@ -15,19 +15,18 @@
    <children>
       <AnchorPane prefHeight="664.0" prefWidth="376.0" style="-fx-background-color: #0C60FF;">
          <children>
-            <Button layoutX="65.0" layoutY="487.0" mnemonicParsing="false" onMouseClicked="#HandleEvents" prefHeight="27.0" prefWidth="247.0" styleClass="button2" stylesheets="@../style/style.css" text="Dodaj urządzenie" />
-            <Pane layoutX="299.0" layoutY="332.0" prefHeight="32.0" prefWidth="32.0" />
+            <Button layoutX="65.0" layoutY="570.0" mnemonicParsing="false" onMouseClicked="#HandleEvents" prefHeight="27.0" prefWidth="247.0" styleClass="button2" stylesheets="@../style/style.css" text="Dodaj urządzenie" />
             <Label layoutX="66.0" layoutY="160.0" prefHeight="23.0" prefWidth="259.0" text="Dodaj/wyświetl urządzenia w magazynie" textFill="WHITE">
                <font>
                   <Font name="Segoe UI" size="14.0" />
                </font>
             </Label>
-            <TextField fx:id="txtSN" layoutX="183.0" layoutY="234.0" prefHeight="32.0" prefWidth="114.0" promptText="Numer seryjny" styleClass="combo-box" stylesheets="@../style/style.css">
+            <TextField fx:id="txtSN" layoutX="122.0" layoutY="234.0" prefHeight="32.0" prefWidth="114.0" promptText="Numer seryjny" styleClass="combo-box" stylesheets="@../style/style.css">
                <font>
                   <Font size="14.0" />
                </font>
             </TextField>
-            <TextField fx:id="txtProducent" layoutX="34.0" layoutY="316.0" prefHeight="32.0" prefWidth="133.0" promptText="Producent" styleClass="combo-box" stylesheets="@../style/style.css">
+            <TextField fx:id="txtProducent" layoutX="253.0" layoutY="234.0" prefHeight="32.0" prefWidth="107.0" promptText="Producent" styleClass="combo-box" stylesheets="@../style/style.css">
                <font>
                   <Font size="14.0" />
                </font>
@@ -42,7 +41,7 @@
                   <Image url="@../images/icons8_file_settings_128px.png" />
                </image>
             </ImageView>
-            <Label layoutX="230.0" layoutY="204.0" text="SN" textFill="WHITE">
+            <Label layoutX="169.0" layoutY="204.0" text="SN" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>
@@ -52,37 +51,87 @@
                   <Font name="System Bold" size="14.0" />
                </font>
             </Label>
-            <TextField fx:id="txtId" layoutX="100.0" layoutY="234.0" prefHeight="32.0" prefWidth="65.0" promptText="ID" styleClass="combo-box" stylesheets="@../style/style.css">
+            <TextField fx:id="txtId" layoutX="39.0" layoutY="234.0" prefHeight="32.0" prefWidth="65.0" promptText="ID" styleClass="combo-box" stylesheets="@../style/style.css">
                <font>
                   <Font size="14.0" />
                </font>
             </TextField>
-            <Label layoutX="125.0" layoutY="204.0" text="ID" textFill="WHITE">
+            <Label layoutX="64.0" layoutY="204.0" text="ID" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>
             </Label>
-            <Label layoutX="250.0" layoutY="288.0" text="Model" textFill="WHITE">
+            <Label layoutX="58.0" layoutY="286.0" text="Model" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>
             </Label>
-            <Label layoutX="171.0" layoutY="372.0" text="Typ" textFill="WHITE">
+            <Label layoutX="171.0" layoutY="455.0" text="Typ" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>
             </Label>
-            <ComboBox fx:id="txtTyp" layoutX="108.0" layoutY="409.0" prefHeight="27.0" prefWidth="150.0" stylesheets="@../style/style.css" />
-            <TextField fx:id="txtModel" layoutX="196.0" layoutY="316.0" prefHeight="32.0" prefWidth="133.0" promptText="Model" styleClass="combo-box" stylesheets="@../style/style.css">
+            <ComboBox fx:id="txtTyp" layoutX="108.0" layoutY="492.0" prefHeight="27.0" prefWidth="150.0" stylesheets="@../style/style.css" />
+            <TextField fx:id="txtModel" layoutX="20.0" layoutY="316.0" prefHeight="32.0" prefWidth="107.0" promptText="Model" styleClass="combo-box" stylesheets="@../style/style.css">
                <font>
                   <Font size="14.0" />
                </font>
             </TextField>
-            <Label layoutX="79.0" layoutY="288.0" text="Producent" textFill="WHITE">
+            <Label layoutX="272.0" layoutY="204.0" text="Producent" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>
             </Label>
+            <Label layoutX="180.0" layoutY="285.0" text="CPU" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Label>
+            <TextField fx:id="txtCPU" layoutX="142.0" layoutY="315.0" prefHeight="32.0" prefWidth="107.0" promptText="CPU" styleClass="combo-box" stylesheets="@../style/style.css">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </TextField>
+            <Label layoutX="297.0" layoutY="285.0" text="GPU" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Label>
+            <TextField fx:id="txtGPU" layoutX="259.0" layoutY="315.0" prefHeight="32.0" prefWidth="107.0" promptText="GPU" styleClass="combo-box" stylesheets="@../style/style.css">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </TextField>
+            <Label layoutX="61.0" layoutY="361.0" text="RAM" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Label>
+            <TextField fx:id="txtRAM" layoutX="23.0" layoutY="391.0" prefHeight="32.0" prefWidth="107.0" promptText="RAM" styleClass="combo-box" stylesheets="@../style/style.css">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </TextField>
+            <Label layoutX="183.0" layoutY="360.0" text="Dysk" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Label>
+            <TextField fx:id="txtDysk" layoutX="145.0" layoutY="390.0" prefHeight="32.0" prefWidth="107.0" promptText="Dysk" styleClass="combo-box" stylesheets="@../style/style.css">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </TextField>
+            <Label layoutX="300.0" layoutY="360.0" text="Ekran" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Label>
+            <TextField fx:id="txtEkran" layoutX="262.0" layoutY="390.0" prefHeight="32.0" prefWidth="107.0" promptText="Ekran" styleClass="combo-box" stylesheets="@../style/style.css">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </TextField>
          </children>
       </AnchorPane>
       <Label fx:id="lblStatus" layoutX="392.0" layoutY="32.0" prefHeight="32.0" prefWidth="389.0" text="Status :" />
