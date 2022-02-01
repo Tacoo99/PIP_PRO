@@ -20,12 +20,12 @@
       </Label>
       <AnchorPane layoutX="38.0" layoutY="224.0" onMouseClicked="#OpenMyAccount" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: gray;">
          <children>
-            <ImageView fitHeight="67.0" fitWidth="74.0" layoutX="69.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="67.0" fitWidth="74.0" layoutX="69.0" layoutY="14.0" onMouseClicked="#OpenMyAccount" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../Home/users.png" />
                </image>
             </ImageView>
-            <Label layoutX="41.0" layoutY="123.0" text="Moje konto">
+            <Label layoutX="41.0" layoutY="123.0" onMouseClicked="#OpenMyAccount" text="Moje konto">
                <font>
                   <Font size="24.0" />
                </font>

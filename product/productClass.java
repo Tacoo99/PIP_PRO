@@ -4,7 +4,7 @@ public class productClass {
 
     public String id;
     public  String sn;
-    public  String producent;
+    public String producent;
     public String model;
     public  String typ;
     public String cpu;

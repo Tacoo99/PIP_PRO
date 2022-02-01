@@ -30,12 +30,11 @@ public class MainPageController{
     @FXML
     private Label loggedUser;
 
-
     Connection con;
     PreparedStatement preparedStatement;
     ResultSet resultSet;
     int orders = 0;
-    int sum,discount;
+    int discount;
 
     public MainPageController() {
         con = ConnectionUtil.conDB();
@@ -43,7 +42,6 @@ public class MainPageController{
 
         @FXML
     void OpenMyAccount(MouseEvent event) {
-
 
         String CurrUser = loggedUser.getText();
         String sql = "SELECT email, name, surname, acc_creation FROM clients WHERE login = ?";
@@ -61,27 +59,13 @@ public class MainPageController{
                 acc_creat = resultSet.getString("acc_creation");
             }
 
-            String sql2 = "SELECT * from orders WHERE clientName = ?";
+            String sql2 = "SELECT * from orders WHERE klient = ?";
             preparedStatement = con.prepareStatement(sql2);
             preparedStatement.setString(1, CurrUser );
             resultSet = preparedStatement.executeQuery();
 
             while(resultSet.next()){
                 orders++;
-                sum = sum + resultSet.getInt("cost");
-            }
-
-            if(sum > 2000){
-                discount = 5;
-            }
-            if(sum > 5000){
-                discount = 10;
-            }
-            if(sum > 10000){
-                discount = 20;
-            }
-            if(sum > 50000){
-                discount = 30;
             }
 
             Node node = (Node) event.getSource();
@@ -138,7 +122,6 @@ public class MainPageController{
             } catch (IOException ex) {
                 System.err.println(ex.getMessage());
             }
-
 
     }
 
