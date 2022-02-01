@@ -21,7 +21,7 @@
         </Label>
         <AnchorPane layoutX="53.0" layoutY="269.0" onMouseClicked="#OpenLaptops" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: gray;">
             <children>
-                <Label layoutX="63.0" layoutY="123.0" text="Laptop">
+                <Label layoutX="63.0" layoutY="123.0" onMouseClicked="#OpenLaptops" text="Laptop">
                     <font>
                         <Font size="24.0" />
                     </font>
@@ -35,7 +35,7 @@
         </AnchorPane>
         <AnchorPane layoutX="295.0" layoutY="269.0" onMouseClicked="#OpenPhones" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: gray;">
             <children>
-                <Label layoutX="52.0" layoutY="121.0" text="Smartfon">
+                <Label layoutX="52.0" layoutY="121.0" onMouseClicked="#OpenPhones" text="Smartfon">
                     <font>
                         <Font size="24.0" />
                     </font>
@@ -47,16 +47,16 @@
             </ImageView>
             </children>
         </AnchorPane>
-        <AnchorPane layoutX="544.0" layoutY="269.0" onMouseClicked="#OpenMonitors" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: gray;">
+        <AnchorPane layoutX="544.0" layoutY="269.0" onMouseClicked="#OpenTablets" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: gray;">
             <children>
-                <Label alignment="CENTER" contentDisplay="CENTER" layoutX="22.0" layoutY="118.0" prefHeight="35.0" prefWidth="156.0" text="Monitor" textAlignment="CENTER" wrapText="true">
+                <Label alignment="CENTER" contentDisplay="CENTER" layoutX="22.0" layoutY="118.0" prefHeight="35.0" prefWidth="156.0" text="Tablet" textAlignment="CENTER" wrapText="true">
                     <font>
                         <Font size="24.0" />
                     </font>
                 </Label>
-                <ImageView fitHeight="67.0" fitWidth="74.0" layoutX="67.0" layoutY="33.0" onMouseClicked="#OpenMonitors" pickOnBounds="true" preserveRatio="true">
+                <ImageView fitHeight="67.0" fitWidth="74.0" layoutX="67.0" layoutY="33.0" onMouseClicked="#OpenTablets" pickOnBounds="true" preserveRatio="true">
                     <image>
-                        <Image url="@../Home/monitor.png" />
+                        <Image url="@../Home/tablet.png" />
                     </image>
                 </ImageView>
             </children>

@@ -26,7 +26,7 @@
       <Line endX="-114.0" endY="414.0" layoutX="320.0" layoutY="253.0" startX="-115.0" startY="-253.0" />
       <AnchorPane layoutX="206.0" prefHeight="667.0" prefWidth="634.0" style="-fx-background-color: #ffffff;">
          <children>
-            <AnchorPane layoutX="55.0" layoutY="23.0" prefHeight="177.0" prefWidth="225.0" style="-fx-border-color: gray;">
+            <AnchorPane layoutX="179.0" layoutY="48.0" prefHeight="177.0" prefWidth="225.0" style="-fx-border-color: gray;">
                <children>
                   <ImageView fitHeight="67.0" fitWidth="74.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -41,32 +41,18 @@
                   </Label>
                </children>
             </AnchorPane>
-            <AnchorPane layoutX="338.0" layoutY="23.0" prefHeight="177.0" prefWidth="225.0" style="-fx-border-color: gray;">
-               <children>
-                  <ImageView fitHeight="67.0" fitWidth="74.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../Home/money.png" />
-                     </image>
-                  </ImageView>
-                  <TextField fx:id="sumText" alignment="CENTER" editable="false" layoutX="38.0" layoutY="117.0" />
-                  <Label layoutX="105.0" layoutY="48.0" text="Kwota">
-                     <font>
-                        <Font size="14.0" />
-                     </font>
-                  </Label>
-               </children>
-            </AnchorPane>
-            <TableView fx:id="tblData" layoutX="152.0" layoutY="319.0" prefHeight="317.0" prefWidth="318.0" />
+            <TableView fx:id="tblData" layoutX="57.0" layoutY="307.0" prefHeight="317.0" prefWidth="508.0" />
             <Label fx:id="refreshStatus" layoutX="57.0" layoutY="636.0" prefHeight="17.0" prefWidth="508.0" textAlignment="CENTER" />
-            <Button layoutX="243.0" layoutY="262.0" mnemonicParsing="false" onMouseClicked="#GetOrderList" text="Załaduj listę zamówień" />
             <Accordion layoutX="396.0" layoutY="225.0" />
          </children>
       </AnchorPane>
-      <Button fx:id="cancelButton" layoutX="39.0" layoutY="237.0" mnemonicParsing="false" onMouseClicked="#onBackButton" style="-fx-background-color: white; -fx-text-fill: #A9A9A9; -fx-border-width: 2; -fx-border-color: #A9A9A9; -fx-border-radius: 5;" text="Wróć do menu">
+      <Button fx:id="cancelButton" layoutX="40.0" layoutY="439.0" mnemonicParsing="false" onMouseClicked="#onBackButton" style="-fx-background-color: white; -fx-text-fill: #A9A9A9; -fx-border-width: 2; -fx-border-color: #A9A9A9; -fx-border-radius: 5;" text="Wróć do menu">
          <font>
             <Font size="15.0" />
          </font>
       </Button>
       <Label fx:id="currUser" alignment="TOP_CENTER" contentDisplay="CENTER" layoutX="53.0" layoutY="206.0" prefHeight="17.0" prefWidth="95.0" textAlignment="CENTER" />
+      <Button layoutX="32.0" layoutY="231.0" mnemonicParsing="false" onMouseClicked="#getAcceptedList" prefHeight="43.0" prefWidth="139.0" text="Zatwierdzone zamówienia" textAlignment="CENTER" wrapText="true" />
+      <Button layoutX="31.0" layoutY="301.0" mnemonicParsing="false" onMouseClicked="#getAwaitingList" prefHeight="43.0" prefWidth="139.0" text="Oczekujące na akceptację" textAlignment="CENTER" wrapText="true" />
    </children>
 </AnchorPane>

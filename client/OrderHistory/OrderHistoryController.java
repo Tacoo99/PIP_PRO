@@ -74,11 +74,16 @@ public class OrderHistoryController{
 
     }
 
-    String SQL = "SELECT id, devices, cost FROM orders WHERE clientName = ?";
+    String SQL = "SELECT id, sn_sprzetu, data_zamowienia, godzina_zamowienia, do_kiedy FROM orders WHERE klient = ?";
+    String SQL2 = "SELECT id, sn_sprzetu, data_zamowienia, godzina_zamowienia, do_kiedy FROM pendingorders WHERE klient = ?";
+    int orders = 0;
 
     @FXML
-    void GetOrderList(){
+    void getAcceptedList(){
+
         data = FXCollections.observableArrayList();
+        clearTable();
+
 
         try {
 
@@ -86,6 +91,7 @@ public class OrderHistoryController{
             preparedStatement.setString(1, currUser.getText());
 
             ResultSet rs = preparedStatement.executeQuery();
+
 
             for(int i=0 ; i<rs.getMetaData().getColumnCount(); i++){
                 final int j = i;
@@ -98,6 +104,7 @@ public class OrderHistoryController{
             }
 
             while (rs.next()) {
+                orders++;
                 ObservableList<String> row = FXCollections.observableArrayList();
                 for (int i = 1; i <= rs.getMetaData().getColumnCount(); i++) {
                     row.add(rs.getString(i));
@@ -105,8 +112,6 @@ public class OrderHistoryController{
                 data.add(row);
 
             }
-
-            //FINALLY ADDED TO TableView
             tblData.setItems(data);
 
 
@@ -114,15 +119,61 @@ public class OrderHistoryController{
             e.printStackTrace();
         }
 
-    }
-
-    public void setOrders(int orders){
         ordersText.setText(String.valueOf(orders));
+
     }
 
-    public void setSum(int sum){
-        sumText.setText(String.valueOf(sum));
+    private void clearTable(){
+        tblData.getItems().clear();
+        data.removeAll();
+        tblData.setItems(data);
     }
+
+    int orders2 = 0;
+    @FXML
+    void getAwaitingList(){
+
+        clearTable();
+
+        data = FXCollections.observableArrayList();
+
+        try {
+
+            preparedStatement = con.prepareStatement(SQL2);
+            preparedStatement.setString(1, currUser.getText());
+
+            ResultSet rs = preparedStatement.executeQuery();
+
+
+            for(int i=0 ; i<rs.getMetaData().getColumnCount(); i++){
+                final int j = i;
+                TableColumn col = new TableColumn(rs.getMetaData().getColumnName(i+1));
+
+                col.setCellValueFactory((Callback<TableColumn.CellDataFeatures<ObservableList, String>, ObservableValue<String>>)
+                        param -> new SimpleStringProperty(param.getValue().get(j).toString()));
+
+                tblData.getColumns().addAll(col);
+            }
+
+            while (rs.next()) {
+                orders2++;
+                ObservableList<String> row = FXCollections.observableArrayList();
+                for (int i = 1; i <= rs.getMetaData().getColumnCount(); i++) {
+                    row.add(rs.getString(i));
+                }
+                data.add(row);
+
+            }
+            tblData.setItems(data);
+
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        ordersText.setText(String.valueOf(orders2));
+    }
+
 
     public void setLogin(String login){
         LoggedUser = login;

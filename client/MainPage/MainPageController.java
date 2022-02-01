@@ -146,17 +146,6 @@ public class MainPageController{
     void OpenHistory(MouseEvent event) {
 
         try {
-
-            String sql3 = "SELECT * from orders WHERE clientName = ?";
-            preparedStatement = con.prepareStatement(sql3);
-            preparedStatement.setString(1, loggedUser.getText() );
-            resultSet = preparedStatement.executeQuery();
-
-            while(resultSet.next()){
-                orders++;
-                sum = sum + resultSet.getInt("cost");
-            }
-
             Node node = (Node) event.getSource();
             Stage stageMain = (Stage) node.getScene().getWindow();
             stageMain.close();
@@ -165,8 +154,6 @@ public class MainPageController{
             Parent root = loader.load();
 
             OrderHistoryController scene2Controller = loader.getController();
-            scene2Controller.setSum(sum);
-            scene2Controller.setOrders(orders);
             scene2Controller.setLogin(loggedUser.getText());
 
             Stage stage = new Stage();
@@ -176,7 +163,7 @@ public class MainPageController{
             stage.show();
 
 
-        } catch (IOException | SQLException ex) {
+        } catch (IOException ex) {
             System.err.println(ex.getMessage());
         }
 

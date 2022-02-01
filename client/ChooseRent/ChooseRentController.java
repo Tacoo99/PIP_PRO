@@ -75,13 +75,59 @@ public class ChooseRentController{
 
 
         @FXML
-        void OpenPhones() {
+        void OpenPhones(MouseEvent event) {
 
+                try{
+
+                        Node node = (Node) event.getSource();
+                        Stage stageAccount = (Stage) node.getScene().getWindow();
+                        stageAccount.close();
+
+                        FXMLLoader loader = new FXMLLoader(getClass().getResource("Smartphone.fxml"));
+                        Parent root = loader.load();
+
+                        SmartphoneController scene2Controller = loader.getController();
+                        scene2Controller.setUser(user);
+
+                        Stage stage = new Stage();
+                        stage.setScene(new Scene(root));
+                        stage.getIcons().add(new Image("/images/icons8_file_settings_128px.png"));
+                        stage.setTitle("SKL - wypożycz smartfona");
+                        stage.show();
+
+
+
+                } catch (IOException ex) {
+                        System.err.println(ex.getMessage());
+                }
         }
 
         @FXML
-        void OpenMonitors() {
+        void OpenTablets(MouseEvent event) {
 
+                try{
+
+                        Node node = (Node) event.getSource();
+                        Stage stageAccount = (Stage) node.getScene().getWindow();
+                        stageAccount.close();
+
+                        FXMLLoader loader = new FXMLLoader(getClass().getResource("Tablet.fxml"));
+                        Parent root = loader.load();
+
+                        TabletController scene2Controller = loader.getController();
+                        scene2Controller.setUser(user);
+
+                        Stage stage = new Stage();
+                        stage.setScene(new Scene(root));
+                        stage.getIcons().add(new Image("/images/icons8_file_settings_128px.png"));
+                        stage.setTitle("SKL - wypożycz tableta");
+                        stage.show();
+
+
+
+                } catch (IOException ex) {
+                        System.err.println(ex.getMessage());
+                }
         }
 
 }

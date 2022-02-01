@@ -128,7 +128,6 @@ public class AddDeviceController implements Initializable {
 
         txtTyp.getItems().addAll(
                 "Laptop",
-                "Komputer",
                 "Tablet",
                 "Telefon"
         );
