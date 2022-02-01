@@ -183,6 +183,28 @@ public class Home_AdminController implements Initializable, Serializable {
 
     }
 
+    public void approveRent(){
+
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("../approve_rent/ApproveRent.fxml"));
+
+            Parent root = loader.load();
+
+            loader.getController();
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            stage.getIcons().add(new Image("/images/icons8_file_settings_128px.png"));
+            stage.setTitle("Safety Stock - wypożyczone urządzenia");
+            stage.initStyle(StageStyle.UNDECORATED);
+            stage.show();
+
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {

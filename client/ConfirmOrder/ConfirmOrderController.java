@@ -21,6 +21,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.ResourceBundle;
@@ -34,6 +35,10 @@ public class ConfirmOrderController implements Initializable{
     public ConfirmOrderController() {
         con = ConnectionUtil.conDB();
     }
+
+    DateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
+    Date today;
+    Date date;
 
     @FXML
     private Label loggedUser;
@@ -85,11 +90,9 @@ public class ConfirmOrderController implements Initializable{
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
-        DateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
-        Date date = new Date();
+        date = new Date();
         String data = dateFormat.format(date);
         System.out.println(data);
-
         txtDataWypoz.setText(dateFormat.format(date));
 
 
@@ -213,77 +216,99 @@ public class ConfirmOrderController implements Initializable{
     }
 
     @FXML
-    private void confirmOrder(){
+    private void confirmOrder() {
 
         boolean status = false;
 
-        if( txtImie.getText().isEmpty() ){
+        if (txtImie.getText().isEmpty()) {
             txtImie.setStyle(errorStyle);
             setLblError();
             status = false;
-        }
-        else{
+        } else {
             txtImie.setStyle(successStyle);
             setlblSuccess();
             status = true;
         }
 
-        if( txtNazwisko.getText().isEmpty() ){
+        if (txtNazwisko.getText().isEmpty()) {
             txtNazwisko.setStyle(errorStyle);
             setLblError();
             status = false;
-        }
-        else{
+        } else {
             txtNazwisko.setStyle(successStyle);
             setlblSuccess();
             status = true;
         }
 
-        if( txtMiasto.getText().isEmpty() ){
+        if (txtMiasto.getText().isEmpty()) {
             txtMiasto.setStyle(errorStyle);
             setLblError();
             status = false;
-        }
-        else{
+        } else {
             txtMiasto.setStyle(successStyle);
             setlblSuccess();
             status = true;
         }
 
-        if( txtDataDo.getValue() == null){
+        //-----------------------------------------------------------------------
+
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+        String chosen_date = txtDataDo.getValue().toString();
+
+        try {
+            today = sdf.parse(chosen_date);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        //------------------------------------------------------------------------
+
+        if ( txtDataDo.getValue() == null) {
             txtDataDo.setStyle(errorStyle);
             setLblError();
             status = false;
-        }
-        else{
+        } else {
             txtDataDo.setStyle(successStyle);
             setlblSuccess();
             status = true;
         }
 
-        if( txtUlica.getText().isEmpty() ){
+        if (txtUlica.getText().isEmpty()) {
             txtUlica.setStyle(errorStyle);
             setLblError();
             status = false;
-        }
-        else{
+        } else {
             txtUlica.setStyle(successStyle);
             setlblSuccess();
             status = true;
         }
 
-        if( txtKod.getText().isEmpty() ){
+        if (txtKod.getText().isEmpty()) {
             txtKod.setStyle(errorStyle);
             setLblError();
             status = false;
-        }
-        else{
+        } else {
             txtKod.setStyle(successStyle);
             setlblSuccess();
             status = true;
         }
 
-        if(status){
+        if( today.compareTo(date) > 0 ){
+
+            status = false;
+            txtDataDo.setStyle(errorStyle);
+            setLblError();
+
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Wystąpił błąd");
+            alert.setHeaderText(null);
+            alert.setContentText("Wybrałeś złą datę!");
+            alert.showAndWait();
+        }
+
+
+
+        if (status) {
 
             System.out.println("Ustawiam wartość 'dostepny' tego sprzętu na 0");
 
@@ -294,8 +319,25 @@ public class ConfirmOrderController implements Initializable{
                 preparedStatement.setString(1, SN);
                 preparedStatement.executeUpdate();
 
-        } catch (SQLException e) {
+            } catch (SQLException e) {
                 e.printStackTrace();
+            }
+
+
+            try {
+                String st = "INSERT INTO pendingorders ( klient, sn_sprzetu, data_zamowienia, godzina_zamowienia, do_kiedy ) VALUES ( ?,?,?,?,? )";
+                preparedStatement = con.prepareStatement(st);
+                preparedStatement.setString(1, loggedUser.getText() );
+                preparedStatement.setString(2, txtSN.getText() );
+                preparedStatement.setString(3, txtDataWypoz.getText());
+                preparedStatement.setString(4, txtGodzWypoz.getText());
+                preparedStatement.setString(5, txtDataDo.getValue().toString());
+
+                preparedStatement.executeUpdate();
+
+
+            } catch (SQLException ex) {
+                System.out.println(ex.getMessage());
             }
 
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -307,9 +349,6 @@ public class ConfirmOrderController implements Initializable{
 
         }
 
-
     }
-
-
 }
 

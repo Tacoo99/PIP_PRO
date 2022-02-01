@@ -162,7 +162,7 @@ public class LaptopController implements Initializable {
 
         if (status) {
 
-            String SQL = "SELECT Producent, Model, CPU, GPU, RAM, Dysk, Ekran FROM stock WHERE Typ = ? AND Producent = ? AND CPU = ? AND GPU = ? AND RAM = ? AND Dysk = ? AND EKRAN = ?";
+            String SQL = "SELECT Producent, Model, CPU, GPU, RAM, Dysk, Ekran FROM stock WHERE Typ = ? AND Producent = ? AND CPU = ? AND GPU = ? AND RAM = ? AND Dysk = ? AND EKRAN = ? AND Dostepny = ?";
 
             try {
                 preparedStatement = con.prepareStatement(SQL);
@@ -173,6 +173,7 @@ public class LaptopController implements Initializable {
                 preparedStatement.setString(5, RAM);
                 preparedStatement.setString(6, Disk);
                 preparedStatement.setString(7, Ekran);
+                preparedStatement.setString(8, "1");
                 ResultSet rs = preparedStatement.executeQuery();
 
                 for (int i = 0; i < rs.getMetaData().getColumnCount(); i++) {
@@ -213,12 +214,13 @@ public class LaptopController implements Initializable {
         data.clear();
 
 
-        String SQL = "SELECT Producent, Model, CPU, GPU, RAM, Dysk, Ekran, SN FROM stock WHERE Typ = ?";
+        String SQL = "SELECT Producent, Model, CPU, GPU, RAM, Dysk, Ekran, SN FROM stock WHERE Typ = ? AND Dostepny = ?";
 
         try {
 
             preparedStatement = con.prepareStatement(SQL);
             preparedStatement.setString(1, "Laptop");
+            preparedStatement.setString(2, "1");
             ResultSet rs = preparedStatement.executeQuery();
 
             for (int i = 0; i < rs.getMetaData().getColumnCount(); i++) {
